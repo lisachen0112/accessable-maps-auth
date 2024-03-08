@@ -1,5 +1,10 @@
 import azure.functions as func
+import datetime
+import json
 import logging
+
+
+app = func.FunctionApp()
 
 @app.route(route="login", methods=["POST"], auth_level=func.AuthLevel.ANONYMOUS)
 def login(req: func.HttpRequest) -> func.HttpResponse:
@@ -18,7 +23,7 @@ def login(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"Error processing login request: {str(e)}")
         return func.HttpResponse("Error processing login request", status_code=400)
-
+    
 @app.route(route="register", methods=["POST"], auth_level=func.AuthLevel.ANONYMOUS)
 def register(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
